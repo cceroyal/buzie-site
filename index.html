@@ -3,41 +3,1172 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BUZIE — скоро</title>
-  <meta name="description" content="BUZIE — газировка без калорий. Сайт скоро откроется.">
-  <meta name="theme-color" content="#FBF9AC">
+  <title>BUZIE — газировка без калорий с ресторанными вкусами</title>
+  <meta name="description" content="BUZIE — газировка без калорий с ресторанными сочетаниями вкусов: Манго-Юдзу и Вишня-Бузина. На волне баланса. Москва.">
+  <meta name="theme-color" content="#FFE4D6">
+  <meta property="og:title" content="BUZIE — газировка без калорий">
+  <meta property="og:description" content="Ресторанные сочетания вкусов в стильной банке. На волне баланса.">
+  <meta property="og:image" content="https://buzie.team/assets/cans.jpg">
+  <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="assets/logo-orange.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@800&family=Onest:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    :root { --cream: #FBF9AC; --orange: #FF4000; --ink: #2a0d05; }
-    * { box-sizing: border-box; margin: 0; }
-    html, body { min-height: 100%; }
+    :root {
+      /* Фирменные цвета (как на банке) + светлые фоны для мягкости */
+      --cream: #FFFCEB;        /* фон страницы — светлый сливочный */
+      --cream-2: #FBF9AC;      /* фирменный кремовый */
+      --pink: #FFF0F5;         /* светлый розовый фон */
+      --pink-2: #FCC8DF;       /* фирменный розовый */
+      --peach: #FFE6D6;        /* светлый персиковый фон */
+      --orange: #FF4000;       /* фирменный оранжевый */
+      --orange-text: #E03800;  /* оранжевый для мелкого текста */
+      --orange-dark: #D93600;
+      --cherry: #8D0000;       /* фирменный вишнёвый */
+      --cherry-dark: #6E0000;
+      --ink: #2A1210;
+      --white: #FFFEF8;
+      --radius: 28px;
+      --display: "Montserrat", system-ui, sans-serif;
+      --body: "Montserrat", system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
     body {
-      min-height: 100vh; min-height: 100dvh;
-      background: var(--cream); color: var(--ink);
-      font-family: "Onest", system-ui, -apple-system, sans-serif;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 32px 16px; text-align: center;
+      font-family: var(--body);
+      color: var(--ink);
+      background: var(--cream);
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
     }
-    main { display: flex; flex-direction: column; align-items: center; }
-    img { width: min(420px, 82vw); height: auto; display: block; }
-    .slogan {
-      margin-top: 28px; color: var(--orange);
-      font-family: "Unbounded", system-ui, sans-serif; font-weight: 800;
-      font-size: clamp(16px, 3.4vw, 22px); letter-spacing: .08em;
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; }
+    .wrap { width: min(1180px, 100% - 32px); margin-inline: auto; }
+
+    /* ---------- header ---------- */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: color-mix(in srgb, var(--cream) 86%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: background .3s ease, box-shadow .3s ease;
+      box-shadow: 0 1px 0 rgba(141, 0, 0, .06);
     }
-    p { margin-top: 18px; font-size: clamp(17px, 3.6vw, 20px); }
-    a { color: var(--orange); font-weight: 500; }
-    footer { margin-top: 48px; font-size: 12px; opacity: .6; max-width: 520px; }
+    header.at-top { background: transparent; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 16px; }
+    .nav-logo img { height: 34px; width: auto; }
+    .nav-links { display: flex; gap: 28px; list-style: none; font-weight: 500; }
+    .nav-links a { text-decoration: none; position: relative; padding: 4px 0; }
+    .nav-links a::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; border-radius: 2px;
+      background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .3s ease;
+    }
+    .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      font-family: var(--display); font-weight: 800; font-size: 15px; letter-spacing: .03em;
+      text-transform: uppercase; text-decoration: none;
+      padding: 17px 30px; border-radius: 999px; border: 0; cursor: pointer;
+      transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, background .25s ease, color .25s ease;
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn:active { transform: translateY(0) scale(.98); }
+    .btn .arr { display: inline-block; transition: transform .25s ease; }
+    .btn:hover .arr { transform: translateX(4px); }
+    .btn-orange { background: var(--orange); color: #fff; }
+    .btn-orange:hover { background: var(--orange-dark); box-shadow: 0 14px 28px -12px rgba(255, 64, 0, .6); }
+    .btn-cherry { background: var(--cherry); color: #fff; }
+    .btn-cherry:hover { background: var(--cherry-dark); box-shadow: 0 14px 28px -12px rgba(141, 0, 0, .55); }
+    .btn-ghost { background: transparent; color: var(--orange-text); box-shadow: inset 0 0 0 2px currentColor; }
+    .btn-ghost:hover { background: var(--orange); color: #fff; box-shadow: inset 0 0 0 2px var(--orange); }
+    .btn-sm { padding: 12px 20px; font-size: 13px; }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .burger { display: none; position: relative; width: 46px; height: 46px; border: 0; border-radius: 50%; cursor: pointer;
+      background: rgba(141, 0, 0, .08); -webkit-tap-highlight-color: transparent; }
+    .burger span { position: absolute; left: 13px; right: 13px; height: 2.5px; border-radius: 2px; background: var(--cherry);
+      transition: transform .3s ease, opacity .2s ease, top .3s ease; }
+    .burger span:nth-child(1) { top: 16px; } .burger span:nth-child(2) { top: 22px; } .burger span:nth-child(3) { top: 28px; }
+    header.menu-open .burger span:nth-child(1) { top: 22px; transform: rotate(45deg); }
+    header.menu-open .burger span:nth-child(2) { opacity: 0; }
+    header.menu-open .burger span:nth-child(3) { top: 22px; transform: rotate(-45deg); }
+    @media (max-width: 900px) {
+      .burger { display: block; }
+      .nav-links {
+        position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0;
+        padding: 6px 20px 22px; background: var(--cream); box-shadow: 0 24px 40px -24px rgba(90, 20, 0, .35);
+        opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity .25s ease, transform .25s ease;
+      }
+      .nav-links a { display: block; padding: 15px 2px; font-family: var(--display); font-size: 20px; font-weight: 800; color: var(--cherry);
+        border-bottom: 1px solid rgba(141, 0, 0, .08); }
+      .nav-links li:last-child a { border-bottom: 0; }
+      .nav-links a::after { display: none; }
+      header.menu-open { background: var(--cream) !important; box-shadow: 0 1px 0 rgba(141, 0, 0, .06); }
+      header.menu-open .nav-links { opacity: 1; transform: none; pointer-events: auto; }
+    }
+    @media (max-width: 380px) { .nav .btn-sm { padding: 11px 14px; font-size: 12px; } .nav-logo img { height: 28px; } }
+
+    /* ---------- hero ----------
+       */
+    .hero {
+      --hero-bg: #FFE4D6; --hero-ink: #F04A14; --hero-accent: #F04A14; --wave-fill: var(--cream);
+      margin-top: -68px; padding: 108px 0 0; position: relative; background: var(--hero-bg);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 24px; }
+    .kicker { font-family: var(--display); font-weight: 800; color: var(--hero-ink); font-size: clamp(18px, 1.8vw, 22px); }
+    .hero h1 {
+      font-family: var(--display); font-weight: 800; color: var(--hero-ink);
+      font-size: clamp(52px, 6.4vw, 96px); line-height: .98; letter-spacing: -.035em;
+      margin-top: 10px;
+    }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+    .hero-text { position: relative; z-index: 7; align-self: start; margin-top: clamp(24px, 5vw, 70px); }
+    .hero .btn-main { background: var(--hero-accent); color: #fff; }
+    .hero .btn-main:hover { filter: brightness(.92); box-shadow: 0 16px 30px -14px var(--hero-accent); }
+    .hero .btn-ghost { color: var(--hero-accent); }
+    .hero .btn-ghost:hover { background: var(--hero-accent); color: #fff; box-shadow: inset 0 0 0 2px var(--hero-accent); }
+
+    .hero-stage { position: relative; height: calc(var(--can-h) + 110px); }
+    .spot.spot-hero {
+      position: absolute; z-index: 3; display: block; height: var(--can-h); width: calc(var(--can-h) * .4);
+      left: var(--mx, 67%); top: 50%; transform: translate(-50%, -50%);
+    }
+    .hero-cherry {
+      position: absolute; z-index: 2; height: calc(var(--can-h) * var(--cs, .9)); width: auto; max-width: none;
+      left: var(--cx, 27%); top: 50%;
+      transform: translate(-50%, calc(-50% + var(--par, 0px))) perspective(900px) rotateY(var(--ty, 0deg)) rotateX(var(--tx, 0deg)) rotate(var(--cr, -10deg));
+      filter: drop-shadow(0 30px 26px rgba(90, 20, 0, .25));
+      transition: transform .25s ease-out;
+    }
+    /* «На волне баланса»: банки покачиваются на волнах лимонада.
+       Три слоя волн плывут с разной скоростью; передний слой перекрывает донышки банок. */
+    .sea { position: absolute; left: 0; right: 0; bottom: -1px; overflow: hidden; pointer-events: none; }
+    .sea-back { z-index: 1; height: clamp(120px, 11vw, 160px); }
+    .sea-front { z-index: 6; height: clamp(64px, 6.6vw, 96px); }
+    .sea svg { position: absolute; left: 0; bottom: 0; width: 200%; display: block; animation: sea 16s linear infinite; }
+    .sea .w-pink { height: 100%; animation-duration: 19s; }
+    .sea .w-peach { height: 74%; animation-duration: 13s; animation-direction: reverse; }
+    .sea .w-cream { height: 100%; animation-duration: 10s; }
+    .sea .w-pink path { fill: var(--pink-2); }
+    .sea .w-peach path { fill: #FFC4A3; }
+    .sea .w-cream path { fill: var(--cream); }
+    @keyframes sea { to { transform: translateX(-50%); } }
+
+    /* банки мягко покачиваются, будто плывут */
+    @keyframes bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -14px; } }
+    .hero-cherry { animation: bob 5.2s ease-in-out -1.8s infinite; }
+    .flyer img { animation: bob 4.6s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .sea svg, .hero-cherry, .flyer img { animation: none; } }
+
+    /* Первый экран: «Персик» — нежный персиковый фон, тёплый оранжевый текст */
+    .hero h1 em { font-style: normal; }
+    .hero-grid > * { min-width: 0; }
+    @media (max-width: 520px) {
+      .hero h1 { font-size: min(12.5vw, 64px); }
+    }
+
+    /* плавное появление блоков при прокрутке */
+    .js .reveal { opacity: 0; transform: translateY(36px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
+    .js .reveal.in { opacity: 1; transform: none; }
+    .js .reveal.d1 { transition-delay: .1s; } .js .reveal.d2 { transition-delay: .2s; } .js .reveal.d3 { transition-delay: .3s; }
+
+    /* 3D-наклон карточек за мышкой */
+    [data-tilt] { transform-style: preserve-3d; transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease; will-change: transform; }
+    [data-tilt]:hover { box-shadow: 0 30px 50px -30px rgba(90, 20, 0, .45); }
+    @media (prefers-reduced-motion: reduce) {
+      .js .reveal { opacity: 1; transform: none; transition: none; }
+      [data-tilt] { transition: none; }
+    }
+
+    /* ---------- can spots + flying can ---------- */
+    :root { --can-h: clamp(320px, 34vw, 440px); }
+    .spot { position: relative; height: calc(var(--can-h) + 40px); display: grid; place-items: center; }
+    .spot .blob {
+      position: absolute; width: min(100%, calc(var(--can-h) * .9)); aspect-ratio: 1; border-radius: 50%;
+      background: var(--peach);
+    }
+    .spot-cherry .blob { background: var(--pink-2); }
+    .spot img { height: var(--can-h); width: auto; max-width: none; position: relative; z-index: 2; }
+    .spot .static-can { transform: rotate(var(--r, 0deg)); filter: drop-shadow(0 26px 22px rgba(120, 40, 20, .18)); }
+    .spot-hero .static-can { --r: 6deg; height: 100%; }
+    .spot-mango .static-can { --r: -7deg; }
+    .spot-cherry .static-can { --r: 7deg; }
+    .spot .back-can {
+      position: absolute; height: calc(var(--can-h) * .86);
+      left: 50%; top: 50%; transform: translate(-112%, -48%) rotate(-12deg);
+      filter: drop-shadow(0 20px 18px rgba(120, 40, 20, .14));
+    }
+    .fly-on .spot .static-can { visibility: hidden; }
+    .flyer {
+      display: none; position: absolute; left: 0; top: 0; z-index: 5; pointer-events: none;
+      height: var(--can-h); will-change: transform;
+      filter: drop-shadow(0 30px 24px rgba(120, 40, 20, .2));
+    }
+    .fly-on .flyer { display: block; }
+    .flyer img { position: absolute; left: 0; top: 0; height: 100%; width: auto; max-width: none; transition: opacity .35s ease; }
+    .flyer .c-cherry, .flyer.is-cherry .c-mango { opacity: 0; }
+    .flyer.is-cherry .c-cherry { opacity: 1; }
+    .fruit {
+      display: none; position: absolute; left: 0; top: 0; z-index: 6; pointer-events: none;
+      width: clamp(54px, 7vw, 92px); height: auto; opacity: 0; will-change: transform, opacity;
+    }
+    .fly-on .fruit { display: block; }
+    @media (max-width: 700px) {
+      :root { --can-h: min(330px, 84vw); }
+      .spot { height: calc(var(--can-h) + 20px); }
+    }
+
+    @media (max-width: 700px) {
+      .hero { padding-top: 96px; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-stage { height: calc(var(--can-h) + 50px); max-width: 480px; width: 100%; margin-inline: auto; }
+    }
+    /* планшет: две колонки, но компактнее */
+    @media (min-width: 701px) and (max-width: 1024px) {
+      :root { --can-h: clamp(260px, 36vw, 360px); }
+      .hero h1 { font-size: 5.4vw; }
+      .sec { padding: 80px 0; }
+    }
+
+    /* ---------- sections ---------- */
+    section { position: relative; }
+    .sec { padding: 96px 0; }
+    .eyebrow {
+      font-family: var(--display); font-weight: 800; font-size: 14px; letter-spacing: .12em;
+      text-transform: uppercase; opacity: .8;
+    }
+    h2 {
+      font-family: var(--display); font-weight: 800;
+      font-size: clamp(32px, 5vw, 60px); line-height: 1.05; letter-spacing: -.015em;
+      margin-top: 10px;
+    }
+    .wave { display: block; width: 100%; height: 60px; }
+
+    /* ---------- flavors ---------- */
+    .flavor { padding: 80px 0; }
+    .flavor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .flavor.mango { background: var(--cream); color: var(--orange-text); }
+    .flavor.cherry { background: var(--pink); color: var(--cherry); }
+    .flavor.cherry .flavor-grid { direction: rtl; }
+    .flavor.cherry .flavor-grid > * { direction: ltr; }
+    .flavor h3 {
+      font-family: var(--display); font-weight: 900; text-transform: uppercase;
+      font-size: clamp(40px, 6.5vw, 84px); line-height: .95; letter-spacing: -.02em;
+    }
+    .notes { list-style: none; margin-top: 28px; display: grid; gap: 14px; font-size: 20px; }
+    .notes li { display: flex; gap: 14px; align-items: baseline; color: var(--ink); }
+    .notes li::before { content: ""; flex: none; width: 12px; height: 12px; border-radius: 50%; background: currentColor; transform: translateY(-2px); }
+    .flavor.mango .notes li::before { background: var(--orange); }
+    .flavor.cherry .notes li::before { background: var(--cherry); }
+    .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .tag {
+      font-family: var(--display); font-weight: 800; font-size: 13px; letter-spacing: .04em; text-transform: uppercase;
+      padding: 10px 16px; border-radius: 999px; border: 2.5px solid currentColor;
+    }
+    .tag.solid { color: var(--white); }
+    .flavor.mango .tag.solid { background: var(--orange); border-color: var(--orange); }
+    .flavor.cherry .tag.solid { background: var(--cherry); border-color: var(--cherry); color: var(--pink); }
+    .flavor-head .eyebrow { margin-bottom: 14px; }
+    /* банки кликабельны — ведут на Ozon */
+    .spot[data-buy], .hero-cherry { cursor: pointer; }
+    .buy-hint {
+      position: fixed; z-index: 70; pointer-events: none; padding: 8px 12px; border-radius: 12px;
+      background: var(--ink); color: #fff; font-size: 13px; font-weight: 700; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px; opacity: 0; transform: translate(14px, 14px) scale(.9);
+      transition: opacity .15s, transform .15s;
+    }
+    .buy-hint img { width: 20px; height: 20px; border-radius: 6px; }
+    .buy-hint.on { opacity: 1; transform: translate(14px, 14px) scale(1); }
+    @media (max-width: 700px) {
+      .flavor-grid { grid-template-columns: 1fr; gap: 32px; }
+      .flavor.cherry .flavor-grid { direction: ltr; }
+    }
+    @media (min-width: 701px) and (max-width: 1024px) {
+      .flavor-grid { gap: 28px; }
+      .notes { font-size: 18px; }
+      .flavor h3 { font-size: clamp(40px, 6.6vw, 64px); }
+    }
+
+    /* ---------- why: «Почему BUZIE такой вкусный и без калорий?» ---------- */
+    .why { background: var(--pink); color: var(--cherry); }
+    .why-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; }
+    .why-head h2 { max-width: 15ch; }
+    .flip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 48px; }
+    .flip {
+      all: unset; display: block; cursor: pointer; perspective: 1200px; height: 380px;
+      border-radius: var(--radius); -webkit-tap-highlight-color: transparent;
+    }
+    .flip:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+    .flip-inner {
+      position: relative; display: block; width: 100%; height: 100%; transform-style: preserve-3d;
+      transition: transform .8s cubic-bezier(.2,.8,.2,1);
+    }
+    .flip.flipped .flip-inner { transform: rotateY(180deg); }
+    @media (hover: hover) { .flip:hover .flip-inner { transform: rotateY(180deg); } .flip.flipped:hover .flip-inner { transform: rotateY(180deg); } }
+    .flip-front, .flip-back {
+      position: absolute; inset: 0; border-radius: var(--radius); padding: 30px 28px;
+      display: flex; flex-direction: column; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    }
+    .flip-front { justify-content: space-between; }
+    .flip-back { transform: rotateY(180deg); background: #fff; color: var(--ink); justify-content: center; gap: 10px; box-shadow: inset 0 0 0 2px var(--pink-2); }
+    .flip-back b { font-family: var(--display); font-weight: 800; font-size: 20px; color: var(--cherry); }
+    .flip-back p { font-size: 15px; line-height: 1.45; }
+    .flip-back .soon-note { font-weight: 700; color: var(--orange-text); }
+    .flip-front .q { font-family: var(--display); font-weight: 800; font-size: 28px; line-height: 1.1; }
+    .flip-front .hint { font-size: 14px; font-weight: 700; opacity: .8; display: flex; align-items: center; gap: 8px; }
+    .flip-front .big { font-family: var(--display); font-weight: 900; font-size: 84px; line-height: .9; letter-spacing: -.04em; }
+    .flip-front .big small { font-size: 26px; letter-spacing: 0; }
+    .flip-front .icons { display: flex; gap: 6px; }
+    .flip-front .icons img { width: 64px; height: 64px; }
+    .f1 .flip-front { background: var(--orange); color: #fff; }
+    .f2 .flip-front { background: var(--cherry); color: var(--pink-2); }
+    .f3 .flip-front { background: var(--pink-2); color: var(--cherry); }
+    .f3 .flip-front .icons img { filter: none; }
+    .why-note { margin-top: 22px; font-size: 13px; color: #7a4a4a; }
+    @media (max-width: 640px) { .flip-grid { grid-template-columns: 1fr; } .flip { height: 340px; } }
+    /* планшет: карточки во всю ширину, но горизонтальные — значок слева, вопрос справа */
+    @media (min-width: 641px) and (max-width: 1024px) {
+      .flip-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 36px; }
+      .flip { height: 230px; }
+      .flip-front { flex-direction: row; align-items: center; justify-content: flex-start; gap: 28px; padding: 26px 32px; }
+      .flip-front .icons, .flip-front .big { flex: none; width: 150px; justify-content: center; }
+      .flip-front .big { font-size: 72px; }
+      .flip-back { padding: 24px 32px; }
+      .flip-back p { font-size: 15.5px; }
+    }
+
+    /* ---------- «Мы добавляем …» ---------- */
+    .adds { position: relative; background: var(--orange); color: #fff; padding: clamp(80px, 9vw, 130px) 0; overflow: hidden; }
+    .adds .wrap { position: relative; z-index: 2; }
+    .adds-text > p { max-width: min(640px, 54%); }
+    /* фото девушки с Вишней-Бузиной: справа, мягко растворяется в оранжевом */
+    .adds-photo {
+      position: absolute; z-index: 1; top: 0; right: 0; bottom: 0; height: 100%; aspect-ratio: 1.1; width: auto;
+      /* кадр чуть отдалён (135% высоты баннера), чтобы была видна рука с банкой */
+      background: url("assets/shot-mango-girl.webp") right top / auto 135% no-repeat;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 21%, #000 52%);
+              mask-image: linear-gradient(to right, transparent 0%, transparent 21%, #000 52%);
+    }
+    @media (max-width: 860px) {
+      .adds { padding: 0 0 64px; text-align: center; }
+      .adds-photo {
+        position: relative; width: 100%; height: 380px; aspect-ratio: auto; background-position: center top; background-size: cover;
+        -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+                mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+      }
+      .adds .wrap { margin-top: -40px; }
+      .adds-text > p { max-width: none; }
+      .adds .rotator { margin-inline: auto; }
+    }
+    .adds-line {
+      font-family: var(--display); font-weight: 800; font-size: clamp(30px, 5vw, 66px); line-height: 1.1; letter-spacing: -.02em;
+    }
+    .rotator {
+      display: block; margin: 4px 0 0; position: relative; height: 1.15em; overflow: hidden;
+      transition: width .5s cubic-bezier(.2,.8,.2,1); color: var(--cream-2);
+    }
+    .rotator span {
+      position: absolute; left: 0; top: 0; white-space: nowrap;
+      transform: translateY(110%); opacity: 0; transition: transform .6s cubic-bezier(.2,.8,.2,1), opacity .6s ease;
+    }
+    .rotator span.on { transform: none; opacity: 1; }
+    .rotator span.out { transform: translateY(-110%); opacity: 0; }
+    .adds-sub { margin-top: 22px; font-size: clamp(16px, 1.6vw, 20px); font-weight: 600; opacity: .95; }
+    .adds-sub small { display: block; margin-top: 8px; font-size: 14px; font-weight: 500; opacity: .85; }
+
+    /* ---------- «На волне баланса»: ВКУСНО + БЕЗ КАЛОРИЙ = БАЛАНС ---------- */
+    .balance { background: var(--cream); text-align: center; }
+    .balance .eyebrow { color: var(--cherry); }
+    .balance h2 { color: var(--orange-text); font-size: clamp(38px, 6.6vw, 92px); line-height: 1; letter-spacing: -.03em; }
+    .balance h2 .wv { position: relative; display: inline-block; }
+    .balance h2 .wv svg { position: absolute; left: -2%; width: 104%; bottom: -.22em; height: .32em; overflow: visible; }
+    .balance h2 .wv path { fill: none; stroke: var(--pink-2); stroke-width: 9; stroke-linecap: round; stroke-dasharray: 520; stroke-dashoffset: 520; transition: stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1) .3s; }
+    .balance .in h2 .wv path, .balance h2.in .wv path { stroke-dashoffset: 0; }
+    .balance-lead { max-width: 640px; margin: 34px auto 0; font-size: clamp(17px, 1.7vw, 20px); }
+    .formula { display: flex; align-items: stretch; justify-content: center; gap: 18px; margin-top: 52px; }
+    .term {
+      flex: 1 1 0; max-width: 300px; border-radius: var(--radius); padding: 30px 24px 28px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    }
+    .term b { font-family: var(--display); font-weight: 900; font-size: clamp(22px, 2.2vw, 30px); text-transform: uppercase; letter-spacing: .01em; line-height: 1.05; }
+    .term span { font-size: 15px; font-weight: 600; opacity: .85; }
+    .term .ico { height: 64px; display: flex; align-items: center; gap: 4px; }
+    .term .ico img { width: 56px; height: 56px; }
+    .term .kcal { font-family: var(--display); font-weight: 900; font-size: 52px; line-height: 1; letter-spacing: -.04em; white-space: nowrap; }
+    .term .kcal small { font-size: 18px; letter-spacing: 0; }
+    .t-taste { background: var(--pink-2); color: var(--cherry); }
+    .t-zero { background: var(--peach); color: var(--orange-text); }
+    .t-bal { background: var(--orange); color: #fff; }
+    .t-bal svg { width: 110px; height: 40px; }
+    .t-bal svg path { fill: none; stroke: #fff; stroke-width: 7; stroke-linecap: round; }
+    .op { align-self: center; font-family: var(--display); font-weight: 900; font-size: 44px; color: var(--orange-text); }
+    @media (max-width: 760px) {
+      .formula { flex-direction: column; align-items: center; gap: 8px; }
+      .term { width: 100%; max-width: 360px; flex-direction: row; justify-content: flex-start; text-align: left; padding: 20px 22px; gap: 16px; }
+      .term .ico, .term .kcal, .t-bal svg { flex: none; width: 104px; justify-content: center; }
+      .term .kcal { font-size: 32px; text-align: center; white-space: nowrap; }
+      .term .kcal small { font-size: 14px; }
+      .op { font-size: 32px; line-height: 1; }
+    }
+
+    /* ---------- where to buy: спокойная светлая карточка «Магазин BUZIE на Ozon» ----------
+       Цвета — как у всего сайта. Ozon — только иконка приложения (у банок и в кнопке). */
+    .buy { background: var(--cream); }
+    .shop-card {
+      position: relative; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: clamp(24px, 4vw, 56px);
+      border-radius: 36px; padding: clamp(28px, 4vw, 56px); overflow: hidden;
+      background: linear-gradient(135deg, #FFF0F5 0%, #FFE9DD 100%);
+      box-shadow: 0 1px 0 rgba(255,255,255,.8) inset, 0 40px 80px -60px rgba(141, 0, 0, .5);
+    }
+    .shop-top { display: flex; align-items: center; gap: 14px; }
+    .ozon-ico { width: 52px; height: 52px; border-radius: 14px; box-shadow: 0 8px 18px -8px rgba(0, 40, 140, .45); }
+    .shop-top span { font-weight: 800; font-size: 15px; color: var(--cherry); line-height: 1.25; }
+    .shop-top small { display: block; font-weight: 600; font-size: 13px; color: #8a6a6a; }
+    .shop-card h2 { color: var(--cherry); font-size: clamp(32px, 4vw, 54px); line-height: 1.04; margin-top: 22px; }
+    .shop-lead { margin-top: 14px; font-size: clamp(16px, 1.4vw, 18px); color: var(--ink); max-width: 36ch; }
+    .shop-flavors { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .shop-flavors button {
+      font: inherit; font-weight: 700; font-size: 15px; cursor: pointer; color: var(--ink);
+      display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px 8px 8px; border-radius: 999px;
+      background: rgba(255,255,255,.7); border: 2px solid transparent; transition: border-color .2s, transform .2s, background .2s;
+    }
+    .shop-flavors button i { width: 24px; height: 24px; border-radius: 50%; display: block; }
+    .shop-flavors button:hover { transform: translateY(-2px); }
+    .shop-flavors button[aria-pressed="true"] { background: #fff; border-color: var(--cherry); color: var(--cherry); }
+    .shop-specs { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: 14px; font-weight: 600; color: #7a5e5a; }
+    .shop-specs span + span::before { content: "·"; margin-right: 16px; color: var(--orange-text); }
+    .btn-shop {
+      display: inline-flex; align-items: center; gap: 12px; margin-top: 26px; text-decoration: none; cursor: pointer;
+      background: var(--cherry); color: #fff; font-weight: 800; font-size: 17px;
+      padding: 10px 24px 10px 10px; border-radius: 999px;
+      transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s, background .25s;
+    }
+    .btn-shop img { width: 38px; height: 38px; border-radius: 11px; }
+    .btn-shop:hover { transform: translateY(-3px); background: var(--cherry-dark); box-shadow: 0 16px 30px -14px rgba(141, 0, 0, .6); }
+    .btn-shop .arr { transition: transform .25s; } .btn-shop:hover .arr { transform: translateX(4px); }
+    .shop-note { margin-top: 12px; font-size: 13px; color: #8a6a6a; }
+
+    /* витрина: банки на мягком круге + «парящая» иконка Ozon */
+    .shop-visual { position: relative; height: clamp(320px, 32vw, 440px); perspective: 1000px; }
+    .shop-stage { position: absolute; inset: 0; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .4s ease-out; transform-style: preserve-3d; }
+    .shop-disc { position: absolute; left: 50%; top: 50%; width: min(86%, 380px); aspect-ratio: 1; transform: translate(-50%, -50%);
+      border-radius: 50%; background: radial-gradient(circle at 40% 35%, #FFFFFF 0%, #FCD7E6 55%, #F9C0D6 100%); }
+    .shop-floor { position: absolute; left: 50%; bottom: 8%; width: 60%; height: 30px; transform: translateX(-50%);
+      background: radial-gradient(closest-side, rgba(141, 0, 0, .25), transparent); filter: blur(6px); }
+    .shop-can {
+      position: absolute; top: 50%; height: 80%; width: auto; max-width: none;
+      filter: drop-shadow(0 26px 22px rgba(120, 20, 20, .28));
+      transition: transform .7s cubic-bezier(.2,.8,.2,1); animation: bob 5s ease-in-out infinite;
+    }
+    .shop-can.c-front { left: 56%; z-index: 3; transform: translate(-50%, -50%) rotate(6deg); }
+    .shop-can.c-back  { left: 36%; z-index: 2; height: 70%; transform: translate(-50%, -48%) rotate(-9deg); animation-delay: -2.2s; }
+    .shop-ozon {
+      position: absolute; z-index: 4; right: 6%; top: 8%; width: clamp(64px, 7vw, 92px); height: auto; border-radius: 22%;
+      transform: rotate(10deg); box-shadow: 0 18px 30px -12px rgba(0, 40, 140, .5); animation: floaty 6s ease-in-out infinite;
+    }
+    .shop-sticker {
+      position: absolute; z-index: 4; left: 4%; bottom: 14%; padding: 9px 14px; border-radius: 14px;
+      background: #fff; color: var(--cherry); font-weight: 800; font-size: 14px; transform: rotate(-6deg);
+      box-shadow: 0 14px 24px -14px rgba(141, 0, 0, .5); animation: floaty 7s ease-in-out -3s infinite;
+    }
+    @keyframes floaty { 0%, 100% { translate: 0 0; } 50% { translate: 0 -12px; } }
+
+    .soon-strip {
+      margin-top: 22px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px;
+      border: 2px dashed rgba(141, 0, 0, .2); border-radius: 24px; padding: 18px 26px; color: var(--ink);
+    }
+    .soon-strip .soon-ttl { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .soon-strip b { font-family: var(--display); font-weight: 800; font-size: clamp(17px, 1.6vw, 20px); color: var(--cherry); }
+    .soon-strip .chip { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; background: var(--pink-2); color: var(--cherry); padding: 7px 12px; border-radius: 999px; }
+    .soon-strip a { font-weight: 800; color: var(--orange-text); text-decoration: none; }
+    .soon-strip a:hover { text-decoration: underline; }
+    @media (min-width: 701px) and (max-width: 1024px) {
+      .shop-card { gap: 24px; padding: 32px; }
+      .shop-visual { height: 340px; }
+      .shop-card h2 { font-size: 34px; }
+    }
+    @media (max-width: 700px) {
+      .shop-card { grid-template-columns: 1fr; border-radius: 28px; }
+      .shop-visual { order: -1; height: 300px; }
+      .btn-shop { width: 100%; justify-content: center; }
+      .shop-flavors button { flex: 1 1 0; min-width: 0; justify-content: center; padding-right: 10px; font-size: 14px; }
+      .soon-strip { padding: 16px 20px; }
+      .soon-strip a { white-space: normal; }
+    }
+    @media (prefers-reduced-motion: reduce) { .shop-can, .shop-ozon, .shop-sticker { animation: none; } }
+
+    /* ---------- B2B ---------- */
+    .b2b { background: var(--pink); color: var(--cherry); }
+    .b2b-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+    .contacts { margin-top: 36px; }
+    .contacts p { font-weight: 700; font-size: 16px; color: var(--ink); }
+    .contact-links { display: grid; gap: 12px; margin-top: 16px; }
+    .contact-link {
+      display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--cherry);
+      font-weight: 800; font-size: clamp(17px, 1.6vw, 20px); padding: 14px 18px; border-radius: 18px;
+      background: rgba(255, 255, 255, .7); transition: background .2s, transform .2s; width: fit-content; max-width: 100%;
+    }
+    a.contact-link:hover { background: #fff; transform: translateX(4px); }
+    .contact-link .ci { flex: none; width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: var(--pink-2); color: var(--cherry); }
+    .contact-link .ci svg { width: 22px; height: 22px; }
+    .contact-link small { display: block; font-size: 13px; font-weight: 600; color: #8a6a6a; }
+    .contact-link span { overflow-wrap: anywhere; }
+    form.lead-form {
+      background: var(--white); border-radius: var(--radius); padding: 34px 30px;
+      box-shadow: 0 30px 60px -40px rgba(163,67,79,.45);
+      display: grid; gap: 16px;
+    }
+    form.lead-form h3 { font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1.15; }
+    label { display: grid; gap: 6px; font-weight: 500; font-size: 15px; color: var(--ink); }
+    input, select, textarea {
+      font: inherit; font-size: 17px; color: var(--ink);
+      padding: 14px 16px; border-radius: 14px; border: 2px solid #F5DCE5; background: #fff;
+      width: 100%;
+    }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--cherry); }
+    textarea { min-height: 96px; resize: vertical; }
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .lead-form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+    .fine { font-size: 13px; color: #7a5e5a; }
+    .form-ok { display: none; text-align: center; padding: 30px 10px; }
+    .form-ok b { display: block; font-family: var(--display); font-size: 26px; margin-bottom: 8px; }
+    @media (max-width: 700px) { .b2b-grid { grid-template-columns: 1fr; gap: 40px; } }
+    @media (min-width: 701px) and (max-width: 1024px) {
+      .b2b-grid { grid-template-columns: .8fr 1.2fr; gap: 28px; }
+      .b2b h2 { font-size: 36px; }
+      .contact-link { font-size: 15px; padding: 12px 14px; }
+    }
+    @media (max-width: 480px) { .row2 { grid-template-columns: 1fr; } form.lead-form { padding: 26px 20px; } }
+
+    /* ---------- footer ---------- */
+    footer { background: var(--cherry); color: var(--pink); padding: 72px 0 40px; }
+    .foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 32px; }
+    .foot-brand { display: inline-grid; justify-items: stretch; }
+    .foot-brand img { width: 0; min-width: 100%; height: auto; }   /* логотип ровно по ширине слогана */
+    .foot-slogan { font-family: var(--display); font-weight: 800; letter-spacing: .06em; margin-top: 14px; text-align: center; white-space: nowrap; }
+    .foot-links { display: grid; gap: 8px; text-align: right; }
+    .foot-links a { text-decoration: none; font-weight: 500; }
+    .foot-links a:hover { color: var(--cream); }
+    .legal { margin-top: 48px; padding-top: 22px; border-top: 1px solid rgba(252,200,223,.25); font-size: 13px; opacity: .75; display: grid; gap: 6px; }
+    @media (max-width: 640px) { .foot-links { text-align: left; } }
   </style>
 </head>
 <body>
-  <main>
-    <img src="assets/logo-orange.png" alt="BUZIE" width="942" height="293">
-    <div class="slogan">НА ВОЛНЕ БАЛАНСА</div>
-    <p>Сайт скоро откроется.<br>Пишите нам: <a href="mailto:drinkbuzie@gmail.com">drinkbuzie@gmail.com</a></p>
-  </main>
+
+<header>
+  <div class="wrap nav">
+    <a class="nav-logo" href="#top" aria-label="BUZIE — на главную"><img src="assets/logo-orange.png" alt="BUZIE" width="942" height="293"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#flavors">Вкусы</a></li>
+      <li><a href="#why">Почему BUZIE</a></li>
+      <li><a href="#buy">Где купить</a></li>
+      <li><a href="#partners">Сотрудничество</a></li>
+    </ul>
+    <div class="nav-right">
+      <a class="btn btn-orange btn-sm" href="https://ozon.ru/s/buzie" target="_blank" rel="noopener">Хочу BUZIE</a>
+      <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text reveal">
+        <div class="kicker">BUZIE — это</div>
+        <h1>лимонад<br>без&nbsp;калорий</h1>
+        <div class="hero-cta">
+          <a class="btn btn-main" href="#flavors">Выбрать вкус <span class="arr">→</span></a>
+          <a class="btn btn-ghost" href="#buy">Где купить</a>
+        </div>
+      </div>
+      <div class="hero-stage">
+        <img class="hero-cherry" src="assets/can-cherry.webp" alt="Банка BUZIE Вишня-Бузина" width="400" height="1001">
+        <div class="spot spot-hero" data-buy data-spot="hero" data-rot="6">
+          <img class="static-can" src="assets/can-mango.webp" alt="Банка BUZIE Манго-Юдзу" width="400" height="994">
+        </div>
+      </div>
+    </div>
+    <!-- Волны лимонада: задние слои за банками, передний — поверх их донышек -->
+    <div class="sea sea-back" aria-hidden="true">
+      <svg class="w-pink" viewBox="0 0 2880 240" preserveAspectRatio="none"><path d="M0,46 q120,-40 240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0 L2880,240 L0,240 Z"/></svg>
+      <svg class="w-peach" viewBox="0 0 2880 240" preserveAspectRatio="none"><path d="M0,46 q120,-40 240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0 L2880,240 L0,240 Z"/></svg>
+    </div>
+    <div class="sea sea-front" aria-hidden="true">
+      <svg class="w-cream" viewBox="0 0 2880 240" preserveAspectRatio="none"><path d="M0,46 q120,-40 240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0 L2880,240 L0,240 Z"/></svg>
+    </div>
+  </section>
+
+  <!-- FLAVORS -->
+  <section id="flavors">
+    <div class="flavor mango">
+      <div class="wrap flavor-grid">
+        <div class="flavor-head reveal">
+          <div class="eyebrow">Вкус №1 · тропическое сочетание</div>
+          <h3>Манго<br>Юдзу</h3>
+          <ul class="notes">
+            <li>Спелое тропическое манго с&nbsp;мягкой сладостью.</li>
+            <li>Юдзу — японский цитрус, что-то среднее между лимоном и&nbsp;мандарином.</li>
+            <li>Свежий бодрящий финиш.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag solid">Без калорий</span>
+            <span class="tag">Содержит витамин C</span>
+            <span class="tag">330 мл</span>
+          </div>
+        </div>
+        <div class="spot spot-mango" data-buy data-spot="mango" data-rot="-7">
+          <div class="blob"></div>
+          <img class="static-can" src="assets/can-mango.webp" alt="Банка BUZIE Манго-Юдзу" width="400" height="994" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cream)">
+      <path d="M0,30 C180,70 360,-10 540,30 C720,70 900,-10 1080,30 C1260,70 1350,20 1440,30 L1440,60 L0,60 Z" fill="#FFF0F5"/>
+    </svg>
+
+    <div class="flavor cherry">
+      <div class="wrap flavor-grid">
+        <div class="flavor-head reveal">
+          <div class="eyebrow">Вкус №2 · ягодное сочетание</div>
+          <h3>Вишня<br>Бузина</h3>
+          <ul class="notes">
+            <li>Насыщенная тёмная вишня.</li>
+            <li>Бузина — мягкая и нежная ягода с&nbsp;небольшой терпкостью в&nbsp;послевкусии.</li>
+            <li>Глубокий бархатный ягодный вкус.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag solid">Без калорий</span>
+            <span class="tag">С натуральным соком</span>
+            <span class="tag">330 мл</span>
+          </div>
+        </div>
+        <div class="spot spot-cherry" data-buy data-spot="cherry" data-rot="7">
+          <div class="blob"></div>
+          <img class="static-can" src="assets/can-cherry.webp" alt="Банка BUZIE Вишня-Бузина" width="400" height="1001" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <!-- Летающая банка: едет по странице при прокрутке (см. скрипт внизу) -->
+    <div class="flyer" aria-hidden="true">
+      <img class="c-mango" src="assets/can-mango.webp" alt="" width="400" height="994">
+      <img class="c-cherry" src="assets/can-cherry.webp" alt="" width="400" height="1001">
+    </div>
+    <img class="fruit" data-seg="0" data-side="-1" data-speed="1.25" data-spin="1" src="assets/fruit-mango.svg" alt="" aria-hidden="true">
+    <img class="fruit" data-seg="0" data-side="1" data-speed="1.6" data-spin="-1" src="assets/fruit-yuzu.svg" alt="" aria-hidden="true">
+    <img class="fruit" data-seg="0" data-side="1.4" data-speed="0.9" data-spin="1" src="assets/fruit-mango.svg" alt="" aria-hidden="true">
+    <img class="fruit" data-seg="1" data-side="1" data-speed="1.3" data-spin="-1" src="assets/fruit-cherry.svg" alt="" aria-hidden="true">
+    <img class="fruit" data-seg="1" data-side="-1.2" data-speed="1.6" data-spin="1" src="assets/fruit-elder.svg" alt="" aria-hidden="true">
+    <img class="fruit" data-seg="1" data-side="-0.9" data-speed="0.95" data-spin="-1" src="assets/fruit-cherry.svg" alt="" aria-hidden="true">
+  </section>
+
+  <!-- WHY -->
+  <section class="why sec" id="why">
+    <div class="wrap">
+      <div class="why-head reveal">
+        <div>
+          <div class="eyebrow">Разбираемся</div>
+          <h2>Почему BUZIE такой вкусный и&nbsp;без&nbsp;калорий?</h2>
+        </div>
+        <button class="btn btn-cherry" type="button" id="whyBtn">Узнать <span class="arr">→</span></button>
+      </div>
+      <div class="flip-grid">
+        <button class="flip f1 reveal" type="button" aria-pressed="false">
+          <span class="flip-inner">
+            <span class="flip-front">
+              <span class="icons"><img src="assets/fruit-mango.svg" alt=""><img src="assets/fruit-yuzu.svg" alt=""></span>
+              <span><span class="q">Почему такие вкусы и&nbsp;какие будут дальше?</span><span class="hint">Нажмите, чтобы узнать ↻</span></span>
+            </span>
+            <span class="flip-back">
+              <b>Сочетания из коктейльной карты</b>
+              <p>Манго с японским цитрусом юдзу, вишня с ягодами бузины — вкусы, которые обычно встречаются в ресторане. Лёгкая кислинка в послевкусии делает их свежими, а не приторными.</p>
+              <p class="soon-note">В разработке ещё 3 новых вкуса — такие же необычные и уникальные сочетания.</p>
+            </span>
+          </span>
+        </button>
+        <button class="flip f2 reveal d1" type="button" aria-pressed="false">
+          <span class="flip-inner">
+            <span class="flip-front">
+              <span class="big">2<small> ккал</small></span>
+              <span><span class="q">Как получилось вкусно и&nbsp;без калорий?</span><span class="hint">Нажмите, чтобы узнать ↻</span></span>
+            </span>
+            <span class="flip-back">
+              <b>Всего 2 ккал на 100 мл</b>
+              <p>Сладость даёт фруктоза, и её в BUZIE совсем немного. Благодаря этому нам удалось сохранить яркий вкус и сделать напиток без калорий: так называют напитки с энергетической ценностью меньше 4 ккал на 100 мл.</p>
+            </span>
+          </span>
+        </button>
+        <button class="flip f3 reveal d2" type="button" aria-pressed="false">
+          <span class="flip-inner">
+            <span class="flip-front">
+              <span class="icons"><img src="assets/fruit-cherry.svg" alt=""><img src="assets/fruit-elder.svg" alt=""></span>
+              <span><span class="q">Что внутри и&nbsp;какой состав?</span><span class="hint">Нажмите, чтобы узнать ↻</span></span>
+            </span>
+            <span class="flip-back">
+              <b>Только натуральное</b>
+              <p>Мы используем только натуральные ароматизаторы и подсластители. Основной — фруктоза, которую получают из настоящего фруктового сока.</p>
+              <p>У каждого вкуса своя фишка: в Вишне-Бузине много натурального вишнёвого сока, в Манго-Юдзу — витамин C. Обе банки по 330 мл, среднегазированные.</p>
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- МЫ ДОБАВЛЯЕМ -->
+  <section class="adds" aria-label="Что мы добавляем в BUZIE">
+    <div class="adds-photo" role="img" aria-label="Девушка с банкой BUZIE Манго-Юдзу"></div>
+    <div class="wrap adds-text reveal">
+      <p class="adds-line">Мы добавляем <span class="rotator" id="rotator"><span class="on">натуральный сок</span><span>витамин C</span><span>авторские вкусы</span><span>немного фруктозы</span></span></p>
+      <p class="adds-sub">…и почти не добавляем калорий: всего 2&nbsp;ккал на&nbsp;100&nbsp;мл.
+        <small>Натуральный сок — в Вишне-Бузине, витамин C — в Манго-Юдзу.</small></p>
+    </div>
+  </section>
+
+  <!-- ПОЙМАЙ ВОЛНУ БАЛАНСА -->
+  <section class="balance sec" id="balance">
+    <div class="wrap">
+      <div class="eyebrow reveal">Наш слоган</div>
+      <h2 class="reveal">На <span class="wv">волне<svg viewBox="0 0 200 30" preserveAspectRatio="none" aria-hidden="true"><path d="M4,15 q24,-22 48,0 t48,0 t48,0 t48,0"/></svg></span> баланса</h2>
+      <p class="balance-lead reveal">Обычно приходится выбирать: вкусно — или без калорий. С BUZIE выбирать не нужно: авторские уникальные сочетания вкусов и всего 2&nbsp;ккал на&nbsp;100&nbsp;мл в одной банке. Это и есть баланс.</p>
+      <div class="formula" role="img" aria-label="Вкусно плюс без калорий равно баланс">
+        <div class="term t-taste reveal" data-tilt>
+          <div class="ico"><img src="assets/fruit-cherry.svg" alt=""><img src="assets/fruit-mango.svg" alt=""></div>
+          <div><b>Вкусно</b><br><span>авторские сочетания</span></div>
+        </div>
+        <div class="op reveal d1" aria-hidden="true">+</div>
+        <div class="term t-zero reveal d1" data-tilt>
+          <div class="kcal">2<small> ккал</small></div>
+          <div><b>Без калорий</b><br><span>на 100 мл</span></div>
+        </div>
+        <div class="op reveal d2" aria-hidden="true">=</div>
+        <div class="term t-bal reveal d2" data-tilt>
+          <svg viewBox="0 0 110 40" aria-hidden="true"><path d="M5,20 q12.5,-16 25,0 t25,0 t25,0 t25,0"/></svg>
+          <div><b>Баланс</b><br><span>без компромиссов</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHERE TO BUY: магазин BUZIE на Ozon -->
+  <section class="buy sec" id="buy">
+    <div class="wrap">
+      <div class="shop-card reveal" id="shopCard" data-v="mango">
+        <div class="shop-text">
+          <div class="shop-top">
+            <img class="ozon-ico" src="assets/ozon-icon.png" alt="Ozon" width="300" height="300">
+            <span>Магазин BUZIE на Ozon<small>оплата и доставка — через Ozon</small></span>
+          </div>
+          <h2>Закажите BUZIE домой</h2>
+          <p class="shop-lead">Упаковка 12 банок по&nbsp;0,33&nbsp;л — выберите вкус и оформите заказ в&nbsp;пару кликов.</p>
+          <div class="shop-flavors" role="group" aria-label="Выберите вкус">
+            <button type="button" data-v="mango" aria-pressed="true"><i style="background: radial-gradient(circle at 35% 30%, #FBF9AC, #FF4000)"></i>Манго-Юдзу</button>
+            <button type="button" data-v="cherry" aria-pressed="false"><i style="background: radial-gradient(circle at 35% 30%, #FCC8DF, #8D0000)"></i>Вишня-Бузина</button>
+          </div>
+          <div class="shop-specs"><span>12 банок × 0,33 л</span><span>без калорий</span><span>среднегазированный</span></div>
+          <a class="btn-shop" id="ozonBtn" target="_blank" rel="noopener"><img src="assets/ozon-icon.png" alt="" width="300" height="300"><span class="lbl">Купить на Ozon</span><span class="arr">→</span></a>
+          <p class="shop-note" id="ozonNote"></p>
+        </div>
+        <div class="shop-visual" id="ozScene" aria-hidden="true">
+          <div class="shop-stage">
+            <div class="shop-disc"></div>
+            <div class="shop-floor"></div>
+            <img class="shop-can c-back" id="ozBack" src="assets/can-cherry.webp" alt="" width="400" height="1001">
+            <img class="shop-can c-front" id="ozFront" src="assets/can-mango.webp" alt="" width="400" height="994">
+            <img class="shop-ozon" src="assets/ozon-icon.png" alt="" width="300" height="300">
+            <span class="shop-sticker">12 × 0,33 л</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="soon-strip reveal">
+        <div class="soon-ttl"><span class="chip">Скоро</span><b>Кафе, рестораны и магазины Москвы</b></div>
+        <a href="#partners">Хотите BUZIE у себя в заведении? →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- B2B -->
+  <section class="b2b sec" id="partners">
+    <div class="wrap b2b-grid">
+      <div>
+        <div class="eyebrow reveal">Сотрудничество</div>
+        <h2 class="reveal">Хочу BUZIE в&nbsp;своё заведение</h2>
+        <div class="contacts reveal">
+          <p>По всем вопросам сотрудничества:</p>
+          <div class="contact-links">
+            <a class="contact-link" href="mailto:drinkbuzie@gmail.com"><span class="ci"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>drinkbuzie@gmail.com<small>почта</small></span></a>
+            <div class="contact-link"><span class="ci"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.3" fill="currentColor"/></svg></span><span>@drinkbuzie</span></div>
+          </div>
+        </div>
+      </div>
+
+      <form class="lead-form reveal" id="leadForm" novalidate>
+        <div class="form-body">
+          <h3>Оставьте заявку — мы свяжемся с вами</h3>
+          <div style="display:grid;gap:16px;margin-top:18px">
+            <label>Название заведения или компании
+              <input name="company" required autocomplete="organization" placeholder="Например, кофейня «Волна»">
+            </label>
+            <div class="row2">
+              <label>Ваше имя
+                <input name="name" required autocomplete="name">
+              </label>
+              <label>Тип
+                <select name="type">
+                  <option>Кофейня</option>
+                  <option>Кондитерская</option>
+                  <option>Ресторан / бургерная</option>
+                  <option>Магазин</option>
+                  <option>Дистрибьютор</option>
+                  <option>Другое</option>
+                </select>
+              </label>
+            </div>
+            <label>Телефон или Telegram
+              <input name="contact" required placeholder="+7 … или @username">
+            </label>
+            <label>Комментарий
+              <textarea name="comment" placeholder="Адрес, примерный объём, вопросы"></textarea>
+            </label>
+            <!-- ловушка для спам-ботов: человек это поле не видит и не заполняет -->
+            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button class="btn btn-cherry" type="submit">Отправить заявку</button>
+            <p class="fine">Нажимая кнопку, вы соглашаетесь на обработку контактных данных для ответа на заявку.</p>
+          </div>
+        </div>
+        <div class="form-ok" id="formOk">
+          <b>Почти готово!</b>
+          <span id="formOkText">Мы открыли письмо с вашей заявкой — нажмите «Отправить» в почте. Если письмо не открылось, напишите нам на <a href="mailto:drinkbuzie@gmail.com">drinkbuzie@gmail.com</a>.</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot-brand">
+        <img src="assets/logo-white.png" alt="BUZIE" width="942" height="293">
+        <div class="foot-slogan">НА ВОЛНЕ БАЛАНСА</div>
+      </div>
+      <div class="foot-links">
+        <a href="mailto:drinkbuzie@gmail.com">drinkbuzie@gmail.com</a>
+        <a href="#partners">Сотрудничество</a>
+        <span>Москва</span>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 ООО «БУЗИ»</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ---------- Летающая банка ----------
+     Банка «плывёт» от главного экрана к блоку Манго-Юдзу, затем к Вишне-Бузине.
+     Пока страница прокручивается между двумя «местами» (.spot), банка держится
+     в центре экрана, покачивается влево-вправо и наклоняется, а рядом падают фрукты. */
+  (function () {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const flyer = document.querySelector(".flyer");
+    const spots = [...document.querySelectorAll(".spot[data-spot]")];
+    const fruits = [...document.querySelectorAll(".fruit")];
+    if (reduce || !flyer || spots.length < 2) return;
+    document.documentElement.classList.add("fly-on");
+
+    let keys = [], canW = 0, canH = 0, vw = 0, cherryTop = Infinity, ticking = false;
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const ease = (t) => t * t * (3 - 2 * t);
+
+    function measure() {
+      const parent = flyer.offsetParent || document.body;
+      const pr = parent.getBoundingClientRect();
+      vw = window.innerWidth;
+      canH = flyer.offsetHeight; // без учёта поворота
+      canW = canH * 0.4;
+      flyer.style.width = canW + "px";
+      const cherrySec = document.querySelector(".flavor.cherry");
+      cherryTop = cherrySec ? cherrySec.getBoundingClientRect().top - pr.top - 30 : Infinity;
+      keys = spots.map((s) => {
+        const r = s.getBoundingClientRect();
+        const cy = r.top + r.height / 2;
+        return {
+          x: r.left - pr.left + r.width / 2 - canW / 2,       // в координатах родителя
+          y: r.top - pr.top + r.height / 2 - canH / 2,
+          rot: parseFloat(s.dataset.rot || 0),
+          cherry: s.dataset.spot === "cherry",
+          s: Math.max(0, cy + window.scrollY - window.innerHeight / 2), // прокрутка, при которой место в центре экрана
+        };
+      });
+      update();
+    }
+
+    function update() {
+      ticking = false;
+      const sy = window.scrollY;
+      let i = 0;
+      while (i < keys.length - 2 && sy > keys[i + 1].s) i++;
+      const a = keys[i], b = keys[i + 1];
+      const t = Math.min(1, Math.max(0, (sy - a.s) / Math.max(1, b.s - a.s)));
+      const e = ease(t);
+      const sway = Math.min(140, vw * 0.12) * Math.sin(Math.PI * 2 * t);
+      const x = lerp(a.x, b.x, e) + sway;
+      const y = lerp(a.y, b.y, t);
+      const rot = lerp(a.rot, b.rot, e) + 16 * Math.sin(Math.PI * 2 * t);
+      // в полёте банка чуть уменьшается; на телефоне сильнее, чтобы меньше закрывать текст
+      const shrink = (vw <= 700 ? 0.45 : vw <= 1024 ? 0.2 : 0.08) * Math.sin(Math.PI * t);
+      // 3D-наклон за мышкой — только пока банка на первом экране
+      const k = i === 0 ? Math.max(0, 1 - t * 3) : 0;
+      const tilt = window.__heroTilt || { x: 0, y: 0 };
+      flyer.style.transform = `translate(${x}px, ${y}px) perspective(900px) rotateY(${tilt.y * k}deg) rotateX(${tilt.x * k}deg) rotate(${rot}deg) scale(${1 - shrink})`;
+      // меняем банку, когда она пересекает волну между кремовым и розовым блоком
+      flyer.classList.toggle("is-cherry", y + canH / 2 > cherryTop);
+
+      // фрукты своего отрезка падают мимо банки и крутятся
+      fruits.forEach((f) => {
+        const seg = +f.dataset.seg;
+        const ft = seg === i ? t : seg < i ? 1 : 0;
+        const vis = Math.sin(Math.PI * ft);
+        if (vis <= 0.001) { f.style.opacity = 0; return; }
+        const side = +f.dataset.side, speed = +f.dataset.speed, spin = +f.dataset.spin;
+        const fx = x + canW / 2 + side * (canW * 0.95 + 30) - f.offsetWidth / 2;
+        const fy = y + canH / 2 + lerp(-canH * 0.7, canH * 0.7, ft) * speed - f.offsetHeight / 2;
+        f.style.opacity = Math.min(1, vis * 1.6);
+        f.style.transform = `translate(${fx}px, ${fy}px) rotate(${ft * 300 * spin}deg)`;
+      });
+    }
+
+    window.__flyUpdate = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    window.__flyMeasure = measure;
+    window.addEventListener("scroll", window.__flyUpdate, { passive: true });
+    window.addEventListener("resize", measure);
+    window.addEventListener("load", measure);
+    if (document.fonts) document.fonts.ready.then(measure);
+    measure();
+  })();
+
+  document.documentElement.classList.add("js");
+  const REDUCE = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const CAN_HOVER = window.matchMedia("(hover: hover)").matches;
+
+  /* ---------- Меню-«бургер» на телефоне и планшете ---------- */
+  (function () {
+    const h = document.querySelector("header"), b = h.querySelector(".burger");
+    const set = (open) => { h.classList.toggle("menu-open", open); b.setAttribute("aria-expanded", open); b.setAttribute("aria-label", open ? "Закрыть меню" : "Открыть меню"); };
+    b.addEventListener("click", () => set(!h.classList.contains("menu-open")));
+    h.querySelectorAll(".nav-links a").forEach((a) => a.addEventListener("click", () => set(false)));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") set(false); });
+    document.addEventListener("click", (e) => { if (!h.contains(e.target)) set(false); });
+  })();
+
+  /* ---------- Шапка прозрачная поверх первого экрана ---------- */
+  (function () {
+    const h = document.querySelector("header");
+    const set = () => h.classList.toggle("at-top", window.scrollY < 20);
+    window.addEventListener("scroll", set, { passive: true }); set();
+  })();
+
+  /* ---------- 3D-наклон банок на первом экране за мышкой + параллакс ---------- */
+  (function () {
+    const hero = document.getElementById("hero");
+    if (!hero || REDUCE) return;
+    if (CAN_HOVER) {
+      hero.addEventListener("mousemove", (e) => {
+        const r = hero.getBoundingClientRect();
+        const nx = (e.clientX - r.left) / r.width * 2 - 1, ny = (e.clientY - r.top) / r.height * 2 - 1;
+        window.__heroTilt = { x: -ny * 10, y: nx * 16 };
+        hero.style.setProperty("--tx", -ny * 10 + "deg");
+        hero.style.setProperty("--ty", nx * 16 + "deg");
+        window.__flyUpdate && window.__flyUpdate();
+      });
+      hero.addEventListener("mouseleave", () => {
+        window.__heroTilt = { x: 0, y: 0 };
+        hero.style.setProperty("--tx", "0deg"); hero.style.setProperty("--ty", "0deg");
+        window.__flyUpdate && window.__flyUpdate();
+      });
+    }
+    window.addEventListener("scroll", () => {
+      if (window.scrollY < window.innerHeight * 1.2) hero.style.setProperty("--par", window.scrollY * 0.18 + "px");
+    }, { passive: true });
+  })();
+
+  /* ---------- 3D-наклон карточек за мышкой ---------- */
+  if (CAN_HOVER && !REDUCE) {
+    document.querySelectorAll("[data-tilt]").forEach((el) => {
+      el.addEventListener("mousemove", (e) => {
+        const r = el.getBoundingClientRect();
+        const nx = (e.clientX - r.left) / r.width - .5, ny = (e.clientY - r.top) / r.height - .5;
+        el.style.transform = `perspective(900px) rotateX(${-ny * 10}deg) rotateY(${nx * 12}deg) translateY(-6px)`;
+      });
+      el.addEventListener("mouseleave", () => { el.style.transform = ""; });
+    });
+  }
+
+  /* ---------- Плавное появление при прокрутке ---------- */
+  (function () {
+    const els = document.querySelectorAll(".reveal");
+    if (REDUCE || !("IntersectionObserver" in window)) { els.forEach((e) => e.classList.add("in")); return; }
+    const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+      if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+    }), { rootMargin: "0px 0px -10% 0px" });
+    els.forEach((e) => io.observe(e));
+  })();
+
+  /* ---------- «Почему так вкусно и без калорий?» — карточки-перевёртыши ---------- */
+  (function () {
+    const cards = [...document.querySelectorAll(".flip")];
+    const btn = document.getElementById("whyBtn");
+    const set = (c, on) => { c.classList.toggle("flipped", on); c.setAttribute("aria-pressed", on); };
+    cards.forEach((c) => c.addEventListener("click", () => set(c, !c.classList.contains("flipped"))));
+    btn.addEventListener("click", () => {
+      const open = !cards.every((c) => c.classList.contains("flipped"));
+      cards.forEach((c, i) => setTimeout(() => set(c, open), REDUCE ? 0 : i * 160));
+      btn.firstChild.textContent = open ? "Свернуть " : "Узнать ";
+    });
+  })();
+
+  /* ---------- «Мы добавляем …» — меняющиеся слова ---------- */
+  (function () {
+    const rot = document.getElementById("rotator");
+    if (!rot) return;
+    const words = [...rot.children];
+    let i = 0;
+    const fit = () => { rot.style.width = words[i].offsetWidth + "px"; };
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(fit);
+    window.addEventListener("resize", fit);
+    if (REDUCE) return;
+    setInterval(() => {
+      const cur = words[i];
+      i = (i + 1) % words.length;
+      cur.classList.remove("on"); cur.classList.add("out");
+      words[i].classList.remove("out"); words[i].classList.add("on");
+      fit();
+      setTimeout(() => cur.classList.remove("out"), 650);
+    }, 2200);
+  })();
+
+  /* ---------- Клик по банке → магазин на Ozon (с подсказкой у курсора) ---------- */
+  (function () {
+    const OZON_STORE = "https://ozon.ru/s/buzie";
+    const hint = document.createElement("div");
+    hint.className = "buy-hint";
+    hint.innerHTML = '<img src="assets/ozon-icon.png" alt="">Купить на Ozon';
+    document.body.appendChild(hint);
+    document.querySelectorAll(".spot[data-buy], .hero-cherry").forEach((el) => {
+      el.setAttribute("role", "link");
+      el.setAttribute("aria-label", "Купить BUZIE на Ozon");
+      el.tabIndex = 0;
+      const go = () => window.open(OZON_STORE, "_blank", "noopener");
+      el.addEventListener("click", go);
+      el.addEventListener("keydown", (e) => { if (e.key === "Enter") go(); });
+      if (CAN_HOVER) {
+        el.addEventListener("mousemove", (e) => { hint.style.left = e.clientX + "px"; hint.style.top = e.clientY + "px"; hint.classList.add("on"); });
+        el.addEventListener("mouseleave", () => hint.classList.remove("on"));
+      }
+    });
+  })();
+
+  /* ---------- Блок «BUZIE на OZON»: выбор вкуса, ссылка, 3D-наклон сцены ---------- */
+  (function () {
+    // Ссылки на товары на Ozon. Пока пусто — кнопка честно пишет «Скоро на Ozon».
+    const OZON_URL = { mango: "https://ozon.ru/s/buzie", cherry: "https://ozon.ru/s/buzie" };
+    const sec = document.getElementById("shopCard");
+    if (!sec) return;
+    const btn = document.getElementById("ozonBtn"), note = document.getElementById("ozonNote");
+    const front = document.getElementById("ozFront"), back = document.getElementById("ozBack");
+    const IMG = { mango: "assets/can-mango.webp", cherry: "assets/can-cherry.webp" };
+    function apply(v) {
+      sec.dataset.v = v;
+      front.src = IMG[v]; back.src = IMG[v === "mango" ? "cherry" : "mango"];
+      sec.querySelectorAll(".shop-flavors button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.v === v));
+      const url = OZON_URL[v];
+      if (url) { btn.href = url; btn.querySelector(".lbl").textContent = "Купить на Ozon"; note.textContent = ""; }
+      else { btn.removeAttribute("href"); btn.querySelector(".lbl").textContent = "Скоро на Ozon"; note.textContent = "Карточка товара появится совсем скоро"; }
+    }
+    sec.querySelectorAll(".shop-flavors button").forEach((b) => b.addEventListener("click", () => {
+      front.animate([{ transform: getComputedStyle(front).transform }, { transform: getComputedStyle(front).transform + " translateY(-30px) rotate(-8deg)" }, { transform: getComputedStyle(front).transform }], { duration: 600, easing: "cubic-bezier(.2,.8,.2,1)" });
+      apply(b.dataset.v);
+    }));
+    apply("mango");
+
+    const scene = document.getElementById("ozScene");
+    if (CAN_HOVER && !REDUCE && scene) {
+      sec.addEventListener("mousemove", (e) => {
+        const r = scene.getBoundingClientRect();
+        const nx = Math.max(-1, Math.min(1, (e.clientX - r.left) / r.width * 2 - 1));
+        const ny = Math.max(-1, Math.min(1, (e.clientY - r.top) / r.height * 2 - 1));
+        scene.style.setProperty("--ry", nx * 8 + "deg");
+        scene.style.setProperty("--rx", -ny * 6 + "deg");
+      });
+      sec.addEventListener("mouseleave", () => { scene.style.setProperty("--ry", "0deg"); scene.style.setProperty("--rx", "0deg"); });
+    }
+  })();
+
+  /* ---------- Форма заявки → Telegram-бот ----------
+     FORM_ENDPOINT — адрес веб-приложения Google Apps Script (см. _tools/telegram-form.gs).
+     Пока адреса нет или он не ответил, форма открывает готовое письмо на почту BUZIE —
+     так заявка не потеряется. */
+  const FORM_ENDPOINT = "";
+  const FORM_EMAIL = "drinkbuzie@gmail.com";
+
+  const form = document.getElementById("leadForm");
+  const okBox = document.getElementById("formOk"), okText = document.getElementById("formOkText");
+
+  function openMail(data) {
+    const body = [
+      "Заявка на сотрудничество с BUZIE", "",
+      "Заведение / компания: " + data.company,
+      "Тип: " + data.type,
+      "Имя: " + data.name,
+      "Телефон / Telegram: " + data.contact,
+      data.comment ? "Комментарий: " + data.comment : "",
+    ].join("\n");
+    window.location.href = "mailto:" + FORM_EMAIL + "?subject=" + encodeURIComponent("Заявка BUZIE: " + data.company) + "&body=" + encodeURIComponent(body);
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const required = [...form.querySelectorAll("[required]")];
+    const empty = required.filter((el) => !el.value.trim());
+    required.forEach((el) => (el.style.borderColor = ""));
+    if (empty.length) {
+      empty.forEach((el) => (el.style.borderColor = "#E03800"));
+      empty[0].focus();
+      return;
+    }
+    const data = Object.fromEntries(new FormData(form));
+    const btn = form.querySelector("button[type=submit]");
+    btn.disabled = true; btn.textContent = "Отправляем…";
+
+    let sent = false;
+    if (FORM_ENDPOINT) {
+      try {
+        // text/plain без лишних заголовков — так браузер не делает предварительный запрос
+        const r = await fetch(FORM_ENDPOINT, { method: "POST", body: JSON.stringify(data) });
+        const j = await r.json();
+        sent = !!j.ok;
+      } catch (err) { sent = false; }
+    }
+
+    form.querySelector(".form-body").style.display = "none";
+    okBox.style.display = "block";
+    if (sent) {
+      okBox.querySelector("b").textContent = "Спасибо! 🍒🥭";
+      okText.textContent = "Заявка отправлена — мы скоро свяжемся с вами.";
+    } else {
+      openMail(data);   // запасной путь: готовое письмо
+    }
+  });
+</script>
 </body>
 </html>
